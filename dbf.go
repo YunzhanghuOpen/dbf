@@ -163,6 +163,23 @@ func (dt *DbfTable) SaveFile(filename string) error {
 	return nil
 }
 
+func (dt *DbfTable) AppendFile(f *os.File) error {
+	_, err := f.Write(dt.dataStore)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (dt *DbfTable) Close(f *os.File) error {
+	dt.dataStore = appendSlice(dt.dataStore, []byte{0x1A})
+	_, err := f.Write(dt.dataStore)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // Sets field value by name.
 func (dt *DbfTable) SetFieldValueByName(row int, fieldName string, value string) {
 	fieldName = strings.ToUpper(fieldName)

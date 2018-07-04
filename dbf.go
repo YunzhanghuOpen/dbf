@@ -75,8 +75,7 @@ func New() *DbfTable {
 
 	// no MDX file (index upon demand)
 	dt.dataStore[28] = 0x00
-	//dt.dataStore[28] = 0xf0 // default to UTF-8 encoding, use 0x57 for ANSI.
-	dt.dataStore[28] = 0x57 // 把默认编码改为ANSI
+	dt.dataStore[28] = 0xf0 // default to UTF-8 encoding, use 0x57 for ANSI.
 	return dt
 }
 
